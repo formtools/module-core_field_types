@@ -66,8 +66,6 @@ function cft_install_field_type($field_type_identifier, $group_id)
   $field_type_id = mysql_insert_id();
 
   // Step 2: field type settings
-  $setting_id_used_for_raw_field_map = "";
-
   for ($i=1; $i<=count($data["settings"]); $i++)
   {
     $setting_info             = $data["settings"][$i-1];
@@ -77,7 +75,6 @@ function cft_install_field_type($field_type_identifier, $group_id)
     $field_orientation        = $setting_info["field_orientation"];
     $default_value_type       = $setting_info["default_value_type"];
     $default_value            = $setting_info["default_value"];
-    $use_for_option_list_map  = isset($setting_info["use_for_option_list_map"]) ? $setting_info["use_for_option_list_map"] : false;
 
     $query = "
       INSERT INTO {$g_table_prefix}field_type_settings (field_type_id, field_label, field_setting_identifier,
@@ -93,16 +90,6 @@ function cft_install_field_type($field_type_identifier, $group_id)
       return array(false, "Failed to insert setting $field_setting_identifier: $error");
     }
     $setting_id = mysql_insert_id();
-
-    // if this setting is being used for the raw field type option list, update the field type record
-    if ($use_for_option_list_map)
-    {
-      mysql_query("
-        UPDATE {$g_table_prefix}field_types
-        SET    raw_field_type_map_multi_select_id = $setting_id
-        WHERE  field_type_id = $field_type_id
-      ");
-    }
 
     for ($j=1; $j<=count($setting_info["options"]); $j++)
     {
@@ -124,6 +111,8 @@ function cft_install_field_type($field_type_identifier, $group_id)
       }
     }
   }
+
+  // raw_field_type_select_id!!!
 
 
   // Step 4: Validation
