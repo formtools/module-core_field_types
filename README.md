@@ -1,10 +1,10 @@
 ## module-core_field_types
 
-EDIT: as of Form Tools Core v2.3.0, this has been moved to the [Form Tools Core](https://github.com/formtools/core). It will remain a standalone component, but since it's integral to the functionality of the script it belongs there. References to this repo will be removed from the site when the next core version rolls out.
-
 This module contains all the default field types available for your forms: input fields, textareas, radios,
 checkboxes, dropdowns, multi-select dropdowns, phone number fields, dates, times, and code/markup fields. It's
 installed automatically for all Core installations after 2.1.5.
+
+> As of Form Tools 3.0.0, this code has been pulled into the [Form Tools Core](https://github.com/formtools/core). This repo is only of use for Form Tools 2.x versions.
 
 ### Documentation
 
